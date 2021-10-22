@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import CakeForm from '../forms/CakeForm';
 import { PlusCircleDotted } from 'react-bootstrap-icons';
 import Navbar from '../components/Navbar';
+import { db } from '../firebase';
 
 const MainPage = () => {
   const [showCakeForm, setShowCakeForm] = useState(false);
