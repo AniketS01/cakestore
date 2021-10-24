@@ -1,5 +1,4 @@
 body {
-  font-family: Varela Round;
   background: #f1f1f1;
 }
 
@@ -11,7 +10,7 @@ a {
 
 .card-sl {
   border-radius: 8px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .card-image img {
@@ -44,11 +43,11 @@ a {
   font-size: 18px;
   font-weight: bold;
   background: #fff;
-  padding: 10px 15px;
+  padding: 5px 15px;
 }
 
 .card-text {
-  padding: 10px 15px;
+  padding: 5px 15px;
   background: #fff;
   font-size: 14px;
   color: #1d1d1d;
@@ -85,5 +84,11 @@ a {
   transition: all 0.5s ease;
 }
 .card-image:hover {
-  transform: scale(1.1);
+  transform: scale(1.1) rotate(2deg);
+}
+
+@media (max-width: 400px) {
+  .card-div {
+    margin-top: 15px;
+  }
 }

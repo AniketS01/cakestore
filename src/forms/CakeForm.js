@@ -1,12 +1,13 @@
-import axios from 'axios';
-import React, { useState, useRef } from 'react';
-import { db } from '../firebase';
+import axios from "axios";
+import React, { useState, useRef } from "react";
+import { db } from "../firebase";
+import "./cakeform.css";
 
 const CakeForm = () => {
   const [cakeTypes, setCakeTypes] = useState([
-    'Designer cake',
-    'Festival cake',
-    'Birthday Cake',
+    "Designer cake",
+    "Festival cake",
+    "Birthday Cake",
   ]);
   const Add = cakeTypes.map((Add) => Add);
   const name = useRef();
@@ -24,7 +25,7 @@ const CakeForm = () => {
 
     try {
       if (!cakePreview) return;
-      const { data } = await axios.post('http://localhost:5000/api/upload', {
+      const { data } = await axios.post("http://localhost:5000/api/upload", {
         data: cakePreview,
       });
       const detail = {
@@ -36,7 +37,7 @@ const CakeForm = () => {
         price: price.current.value,
       };
 
-      await db.collection('Cakes').add(detail);
+      await db.collection("Cakes").add(detail);
       setSuccess(true);
       setError(false);
       setTimeout(() => {
@@ -60,80 +61,89 @@ const CakeForm = () => {
   };
 
   return (
-    <form onSubmit={HandleSubmit}>
-      <div className="container d-flex flex-column">
+    <div className="container contact-form shadow p-3 mb-5 bg-white rounded">
+      <form method="post" onSubmit={HandleSubmit}>
         {success && (
-          <div class="alert alert-success" role="alert">
+          <div className="alert alert-success" role="alert">
             success!
           </div>
         )}
         {error && (
-          <div class="alert alert-danger" role="alert">
+          <div className="alert alert-danger" role="alert">
             something went wrong!
           </div>
         )}
-        <label htmlFor="" style={{ fontWeight: '600' }}>
-          {' '}
-          Image :
-          <input
-            type="file"
-            onChange={(e) => preview(e.target.files[0])}
-            className="mb-2"
-          />
-          {cakePreview && (
-            <img
-              style={{ height: '120px' }}
-              alt="enter img"
-              src={cakePreview}
+        <h3>Add You Cakes Here</h3>
+
+        <div className="row">
+          <div className="col-md-6">
+            <div className="form-group">
+              <input
+                type="file"
+                className="form-control"
+                placeholder="Select Image From here"
+                onChange={(e) => preview(e.target.files[0])}
+                value=""
+              />
+              {cakePreview && (
+                <img
+                  style={{ height: "120px" }}
+                  alt="enter img"
+                  src={cakePreview}
+                />
+              )}
+            </div>
+
+            <div className="form-group mt-2">
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Enter Product Name"
+                ref={name}
+              />
+            </div>
+            <div className="form-group mt-2">
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Enter Price"
+                ref={price}
+              />
+            </div>
+            <div className="form-group mt-2">
+              <select
+                className="form-control"
+                placeholder="Select a Category"
+                ref={Category}
+              >
+                {Add.map((address, key) => (
+                  <option value={address}>{address}</option>
+                ))}
+              </select>
+            </div>
+          </div>
+          <div className="col-md-6 text-area ">
+            <div className="form-group ">
+              <textarea
+                name="txtMsg"
+                className="form-control"
+                placeholder="Your Message *"
+                style={{ width: "100%", height: "180px" }}
+                ref={description}
+              ></textarea>
+            </div>
+          </div>
+          <div className="form-group mt-2">
+            <input
+              type="submit"
+              name="btnSubmit"
+              className="btnContact"
+              value="Submit"
             />
-          )}
-          {/* {cakeImg && console.log(URL.createObjectURL(cakeImg))} */}
-        </label>
-        <label htmlFor="" style={{ fontWeight: '600' }}>
-          Name :{' '}
-          <input
-            type="text"
-            placeholder="Enter Product name"
-            className="mb-2"
-            ref={name}
-          />
-        </label>
-        <label htmlFor="" style={{ fontWeight: '600' }}>
-          description :{' '}
-        </label>
-        <textarea
-          name=""
-          id=""
-          cols="15"
-          rows="5"
-          placeholder="Enter a Description "
-          className="mb-2"
-          ref={description}
-        ></textarea>
-        <label htmlFor="" style={{ fontWeight: '600' }}>
-          Price :{' '}
-          <input
-            type="text"
-            placeholder="Enter price"
-            className="mb-2"
-            ref={price}
-          />
-        </label>
-
-        <label htmlFor="" style={{ fontWeight: '600' }}>
-          Category :{' '}
-          <select name="" id="" className="mb-2" ref={Category}>
-            {Add.map((address, key) => (
-              <option value={address}>{address}</option>
-            ))}
-          </select>
-        </label>
-
-        <button type="submit" className="btn  btn-primary mt-3">
-          Submit
-        </button>
-      </div>
-    </form>
+          </div>
+        </div>
+      </form>
+    </div>
   );
 };
 

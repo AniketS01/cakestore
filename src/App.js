@@ -1,5 +1,6 @@
 import React from "react";
 import Cakecards from "./components/cakecards/Cakecards";
+
 import MainPage from "./pages/MainPage";
 
 const App = () => {
