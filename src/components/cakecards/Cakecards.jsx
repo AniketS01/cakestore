@@ -1,19 +1,26 @@
-import React from 'react';
-import img1 from '../../imgs/img1.svg';
-import './cakecards.css';
+import React from "react";
+import img1 from "../../imgs/img1.svg";
+import "./cakecards.css";
+import { TrashFill } from "react-bootstrap-icons";
 const Cakecards = ({ img, name, description, price }) => {
   return (
     <>
-      <div className="col-md-3">
-        <div className="card-sl">
-          <div className="card-image">
-            <img className="img-fluid " src={img} />
-          </div>
+      <div className="col-lg-3 col-md-6 col-sm-6 ">
+        <div className="card shadow  mb-5 bg-body rounded">
+          <img className="img-fluid card-img-top card-image" src={img} />
 
-          <div className="card-heading">{name}</div>
-          <div className="card-text">{description}</div>
-          <div className="card-text" style={{ fontWeight: 600 }}>
-            Rs {price}/-
+          <div className="card-body p-1">
+            <h1 className="card-heading">{name}</h1>
+            <p className="card-text">{description}</p>
+            <div
+              className="card-text d-flex justify-content-between"
+              style={{ fontWeight: 600 }}
+            >
+              Rs {price}/-
+              <span className="trash">
+                <TrashFill />
+              </span>
+            </div>
           </div>
         </div>
       </div>

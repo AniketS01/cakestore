@@ -1,5 +1,5 @@
 body {
-  background: #f1f1f1;
+  background: #ffffff;
 }
 
 a {
@@ -13,10 +13,11 @@ a {
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.card-image img {
-  max-height: 100%;
-  max-width: 100%;
-  border-radius: 8px 8px 0px 0;
+/* .card-image  {
+  padding: 0;
+} */
+.card-body {
+  padding: 10px;
 }
 
 .card-action {
@@ -43,41 +44,20 @@ a {
   font-size: 18px;
   font-weight: bold;
   background: #fff;
-  padding: 5px 15px;
+  padding: 7px 10px;
 }
 
 .card-text {
-  padding: 5px 15px;
+  padding: 3px 10px;
   background: #fff;
   font-size: 14px;
   color: #1d1d1d;
 }
 
-/* @-webkit-keyframes pulse {
-  0% {
-    -moz-transform: scale(0.9);
-    -ms-transform: scale(0.9);
-    -webkit-transform: scale(0.9);
-    transform: scale(0.9);
-  }
-
-  70% {
-    -moz-transform: scale(1);
-    -ms-transform: scale(1);
-    -webkit-transform: scale(1);
-    transform: scale(1);
-    box-shadow: 0 0 0 50px rgba(90, 153, 212, 0);
-  }
-
-  100% {
-    -moz-transform: scale(0.9);
-    -ms-transform: scale(0.9);
-    -webkit-transform: scale(0.9);
-    transform: scale(0.9);
-    box-shadow: 0 0 0 0 rgba(90, 153, 212, 0);
-  }
-} */
-.card-sl {
+.trash {
+  cursor: pointer;
+}
+.card {
   overflow: hidden;
 }
 .card-image {
@@ -87,8 +67,18 @@ a {
   transform: scale(1.1) rotate(2deg);
 }
 
-@media (max-width: 400px) {
-  .card-div {
-    margin-top: 15px;
+@media (max-width: 380px) {
+  .card-sl {
+    height: 100%;
+    width: 100%;
+  }
+  .card-image img {
+    max-height: 100%;
+    max-width: 100%;
+    border-radius: 8px 8px 0px 0;
+  }
+  .card-sl {
+    max-height: 100%;
+    max-width: 100%;
   }
 }
