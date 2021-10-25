@@ -1,13 +1,11 @@
-import React from "react";
-import Cakecards from "./components/cakecards/Cakecards";
+import React from 'react';
 
-import MainPage from "./pages/MainPage";
+import MainPage from './pages/MainPage';
 
 const App = () => {
   return (
     <div>
       <MainPage />
-      <Cakecards />
     </div>
   );
 };

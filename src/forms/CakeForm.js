@@ -1,13 +1,15 @@
-import axios from "axios";
-import React, { useState, useRef } from "react";
-import { db } from "../firebase";
-import "./cakeform.css";
+import axios from 'axios';
+import React, { useState, useRef } from 'react';
+import { db } from '../firebase';
+import './cakeform.css';
+import { Line } from 'rc-progress';
+//import ProgressBar from 'react-customizable-progressbar';
 
-const CakeForm = () => {
+const CakeForm = ({ cakes, setCakes }) => {
   const [cakeTypes, setCakeTypes] = useState([
-    "Designer cake",
-    "Festival cake",
-    "Birthday Cake",
+    'Designer cake',
+    'Festival cake',
+    'Birthday Cake',
   ]);
   const Add = cakeTypes.map((Add) => Add);
   const name = useRef();
@@ -19,13 +21,17 @@ const CakeForm = () => {
   const [cakePreview, setCakePreview] = useState();
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
+  const [done, setDone] = useState(0);
+  const [showProgress, setShowProgress] = useState(false);
 
   const HandleSubmit = async (e) => {
     e.preventDefault();
+    setShowProgress(true);
+    setDone(40);
 
     try {
       if (!cakePreview) return;
-      const { data } = await axios.post("http://localhost:5000/api/upload", {
+      const { data } = await axios.post('http://localhost:5000/api/upload', {
         data: cakePreview,
       });
       const detail = {
@@ -37,11 +43,15 @@ const CakeForm = () => {
         price: price.current.value,
       };
 
-      await db.collection("Cakes").add(detail);
+      await db.collection('Cakes').add(detail);
+      setDone(100);
+      setCakes([detail, ...cakes]);
       setSuccess(true);
       setError(false);
       setTimeout(() => {
         setSuccess(false);
+        setDone(0);
+        setShowProgress(false);
       }, 3000);
     } catch (error) {
       setError(true);
@@ -62,6 +72,17 @@ const CakeForm = () => {
 
   return (
     <div className="container contact-form shadow p-3 mb-5 bg-white rounded">
+      {showProgress && (
+        <div className="d-flex">
+          <Line
+            percent={done}
+            strokeWidth="1"
+            strokeColor="#50DBB4"
+            trailColor="white"
+          />
+          <span>{done}%</span>
+        </div>
+      )}
       <form method="post" onSubmit={HandleSubmit}>
         {success && (
           <div className="alert alert-success" role="alert">
@@ -87,7 +108,7 @@ const CakeForm = () => {
               />
               {cakePreview && (
                 <img
-                  style={{ height: "120px" }}
+                  style={{ height: '120px' }}
                   alt="enter img"
                   src={cakePreview}
                 />
@@ -128,7 +149,7 @@ const CakeForm = () => {
                 name="txtMsg"
                 className="form-control"
                 placeholder="Your Message *"
-                style={{ width: "100%", height: "180px" }}
+                style={{ width: '100%', height: '180px' }}
                 ref={description}
               ></textarea>
             </div>
