@@ -5,7 +5,14 @@ import './cakeform.css';
 import { Line } from 'rc-progress';
 //import ProgressBar from 'react-customizable-progressbar';
 
-const CakeForm = ({ cakes, setCakes }) => {
+const CakeForm = ({
+  birthdayCake,
+  setBirthdayCake,
+  festivalCake,
+  setFestivalCake,
+  DesignerCake,
+  setDesignerCake,
+}) => {
   const [cakeTypes, setCakeTypes] = useState([
     'Designer cake',
     'Festival cake',
@@ -45,7 +52,15 @@ const CakeForm = ({ cakes, setCakes }) => {
 
       await db.collection('Cakes').add(detail);
       setDone(100);
-      setCakes([detail, ...cakes]);
+      if (detail.Category === 'Designer cake') {
+        setDesignerCake([detail, ...DesignerCake]);
+      }
+      if (detail.Category === 'Festival cake') {
+        setFestivalCake([detail, ...festivalCake]);
+      }
+      if (detail.Category === 'Birthday Cake') {
+        setBirthdayCake([detail, ...birthdayCake]);
+      }
       setSuccess(true);
       setError(false);
       setTimeout(() => {

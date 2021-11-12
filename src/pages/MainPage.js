@@ -8,12 +8,17 @@ import Cakecards from '../components/cakecards/Cakecards';
 const MainPage = () => {
   const [showCakeForm, setShowCakeForm] = useState(false);
   const [cakes, setCakes] = useState([]);
+  const [DesignerCake, setDesignerCake] = useState([]);
+  const [festivalCake, setFestivalCake] = useState([]);
+  const [birthdayCake, setBirthdayCake] = useState([]);
 
   useEffect(() => {
     db.collection('Cakes')
       .get()
       .then((snapshot) => {
-        const cake = [];
+        const Dcake = [];
+        const Fcake = [];
+        const Bcakes = [];
         snapshot.forEach((doc) => {
           const data = {
             id: doc.id,
@@ -24,13 +29,34 @@ const MainPage = () => {
             description: doc.data().description,
             price: doc.data().price,
           };
-          cake.push(data);
+          if (data.category === 'Designer cake') {
+            Dcake.push(data);
+          }
+          if (data.category === 'Festival cake') {
+            Fcake.push(data);
+          }
+          if (data.category === 'Birthday Cake') {
+            Bcakes.push(data);
+          }
         });
-        console.log(cake);
-        setCakes(cake);
-        console.log(cakes);
+        setDesignerCake(Dcake);
+        setFestivalCake(Fcake);
+        setBirthdayCake(Bcakes);
       });
+    console.log(DesignerCake);
   }, []);
+
+  const removeDesignerCake = (id) => {
+    setDesignerCake(DesignerCake.filter((cake) => cake.id !== id));
+  };
+
+  const removeFestivalCake = (id) => {
+    setFestivalCake(festivalCake.filter((cake) => cake.id !== id));
+  };
+
+  const removeBirthdayCake = (id) => {
+    setBirthdayCake(birthdayCake.filter((cake) => cake.id !== id));
+  };
 
   return (
     <div>
@@ -54,19 +80,61 @@ const MainPage = () => {
         {showCakeForm && (
           <div className="p-4">
             {' '}
-            <CakeForm cakes={cakes} setCakes={setCakes} />
+            <CakeForm
+              birthdayCake={birthdayCake}
+              setBirthdayCake={setBirthdayCake}
+              festivalCake={festivalCake}
+              setFestivalCake={setFestivalCake}
+              DesignerCake={DesignerCake}
+              setDesignerCake={setDesignerCake}
+            />
           </div>
         )}
         <div>
           <div className="container" style={{ marginTop: '50px' }}>
+            <h1> Designer Cake </h1>
             <div className="row">
-              {cakes.map((cake) => (
+              {DesignerCake.map((cake) => (
                 <Cakecards
+                  id={cake.id}
                   img={cake.image}
                   name={cake.name}
                   description={cake.description}
                   price={cake.price}
                   category={cake.category}
+                  removeData={(id) => removeDesignerCake(id)}
+                />
+              ))}
+            </div>
+          </div>
+          <div className="container" style={{ marginTop: '50px' }}>
+            <h1>Festival cake</h1>
+            <div className="row">
+              {festivalCake.map((cake) => (
+                <Cakecards
+                  id={cake.id}
+                  img={cake.image}
+                  name={cake.name}
+                  description={cake.description}
+                  price={cake.price}
+                  category={cake.category}
+                  removeData={(id) => removeFestivalCake(id)}
+                />
+              ))}
+            </div>
+          </div>
+          <div className="container" style={{ marginTop: '50px' }}>
+            <h1> Birthday Cake</h1>
+            <div className="row">
+              {birthdayCake.map((cake) => (
+                <Cakecards
+                  id={cake.id}
+                  img={cake.image}
+                  name={cake.name}
+                  description={cake.description}
+                  price={cake.price}
+                  category={cake.category}
+                  removeData={(id) => removeBirthdayCake(id)}
                 />
               ))}
             </div>
