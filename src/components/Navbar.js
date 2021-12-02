@@ -5,12 +5,12 @@ const Navbar = () => {
   return (
     <div>
       <nav
-        class="navbar navbar-expand-lg navbar-light bg-light"
-        style={{ height: "60px" }}
+        className="navbar navbar-expand-lg navbar-dark "
+        style={{ height: "60px" ,backgroundColor:"#C3404E",}}
       >
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">
-            CakeStore
+        <div class="container-fluid" >
+          <a className="navbar-brand ms-4" href="#">
+            VIRSHMANI &nbsp; CAKES 
           </a>
           <button
             class="navbar-toggler"
@@ -28,7 +28,7 @@ const Navbar = () => {
             id="navbarNavAltMarkup"
           >
             <div class="navbar-nav">
-              <a class="nav-link active" aria-current="page" href="#">
+              <a class="nav-link active me-4" aria-current="page" href="#">
                 <PersonFill fontSize={25} style={{ marginRight: "5px" }} />
                 Welcome Admin!
               </a>

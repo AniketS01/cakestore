@@ -31,7 +31,7 @@ const Cakecards = ({
       <div className='col-md-3'>
         <div className='card-sl'>
           <div className='card-image'>
-            <img className='img-fluid' src={img} />
+            <img className='img-fluid cardsize' src={img} />
           </div>
 
           <div className='card-heading'>{name}</div>
