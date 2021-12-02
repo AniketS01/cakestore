@@ -1,9 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
-import CakeForm from '../forms/CakeForm';
-import { PlusCircleDotted } from 'react-bootstrap-icons';
-import Navbar from '../components/Navbar';
-import { db } from '../firebase';
-import Cakecards from '../components/cakecards/Cakecards';
+import React, { useEffect, useRef, useState } from "react";
+import CakeForm from "../forms/CakeForm";
+import { PlusCircleDotted } from "react-bootstrap-icons";
+import Navbar from "../components/Navbar";
+import { db } from "../firebase";
+import Cakecards from "../components/cakecards/Cakecards";
 
 const MainPage = () => {
   const [showCakeForm, setShowCakeForm] = useState(false);
@@ -13,7 +13,7 @@ const MainPage = () => {
   const [birthdayCake, setBirthdayCake] = useState([]);
 
   useEffect(() => {
-    db.collection('Cakes')
+    db.collection("Cakes")
       .get()
       .then((snapshot) => {
         const Dcake = [];
@@ -29,13 +29,13 @@ const MainPage = () => {
             description: doc.data().description,
             price: doc.data().price,
           };
-          if (data.category === 'Designer cake') {
+          if (data.category === "Designer cake") {
             Dcake.push(data);
           }
-          if (data.category === 'Festival cake') {
+          if (data.category === "Festival cake") {
             Fcake.push(data);
           }
-          if (data.category === 'Birthday Cake') {
+          if (data.category === "Birthday Cake") {
             Bcakes.push(data);
           }
         });
@@ -61,13 +61,13 @@ const MainPage = () => {
   return (
     <div>
       <Navbar />
-      <div className="container">
-        <div className="d-flex flex-row align-items-center pt-4">
-          <h3>Add cake</h3>{' '}
+      <div className='container'>
+        <div className='d-flex flex-row align-items-center pt-4'>
+          <h3>Add cake</h3>{" "}
           <PlusCircleDotted
             fontSize={25}
-            color="green"
-            style={{ marginLeft: '5px' }}
+            color='green'
+            style={{ marginLeft: "5px" }}
             onClick={() => {
               if (showCakeForm) {
                 setShowCakeForm(false);
@@ -78,8 +78,8 @@ const MainPage = () => {
           />
         </div>
         {showCakeForm && (
-          <div className="p-4">
-            {' '}
+          <div className='p-4'>
+            {" "}
             <CakeForm
               birthdayCake={birthdayCake}
               setBirthdayCake={setBirthdayCake}
@@ -91,13 +91,14 @@ const MainPage = () => {
           </div>
         )}
         <div>
-          <div className="container" style={{ marginTop: '50px' }}>
+          <div className='container' style={{ marginTop: "50px" }}>
             <h1> Designer Cake </h1>
-            <div className="row">
+            <div className='row'>
               {DesignerCake.map((cake) => (
                 <Cakecards
                   id={cake.id}
                   img={cake.image}
+                  img_id={cake.img_id}
                   name={cake.name}
                   description={cake.description}
                   price={cake.price}
@@ -107,13 +108,14 @@ const MainPage = () => {
               ))}
             </div>
           </div>
-          <div className="container" style={{ marginTop: '50px' }}>
+          <div className='container' style={{ marginTop: "50px" }}>
             <h1>Festival cake</h1>
-            <div className="row">
+            <div className='row'>
               {festivalCake.map((cake) => (
                 <Cakecards
                   id={cake.id}
                   img={cake.image}
+                  img_id={cake.img_id}
                   name={cake.name}
                   description={cake.description}
                   price={cake.price}
@@ -123,13 +125,14 @@ const MainPage = () => {
               ))}
             </div>
           </div>
-          <div className="container" style={{ marginTop: '50px' }}>
+          <div className='container' style={{ marginTop: "50px" }}>
             <h1> Birthday Cake</h1>
-            <div className="row">
+            <div className='row'>
               {birthdayCake.map((cake) => (
                 <Cakecards
                   id={cake.id}
                   img={cake.image}
+                  img_id={cake.img_id}
                   name={cake.name}
                   description={cake.description}
                   price={cake.price}

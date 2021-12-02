@@ -1,8 +1,8 @@
-import axios from 'axios';
-import React, { useState, useRef } from 'react';
-import { db } from '../firebase';
-import './cakeform.css';
-import { Line } from 'rc-progress';
+import axios from "axios";
+import React, { useState, useRef } from "react";
+import { db } from "../firebase";
+import "./cakeform.css";
+import { Line } from "rc-progress";
 //import ProgressBar from 'react-customizable-progressbar';
 
 const CakeForm = ({
@@ -14,9 +14,9 @@ const CakeForm = ({
   setDesignerCake,
 }) => {
   const [cakeTypes, setCakeTypes] = useState([
-    'Designer cake',
-    'Festival cake',
-    'Birthday Cake',
+    "Designer cake",
+    "Festival cake",
+    "Birthday Cake",
   ]);
   const Add = cakeTypes.map((Add) => Add);
   const name = useRef();
@@ -38,7 +38,7 @@ const CakeForm = ({
 
     try {
       if (!cakePreview) return;
-      const { data } = await axios.post('http://localhost:5000/api/upload', {
+      const { data } = await axios.post("http://localhost:5000/api/upload", {
         data: cakePreview,
       });
       const detail = {
@@ -50,15 +50,15 @@ const CakeForm = ({
         price: price.current.value,
       };
 
-      await db.collection('Cakes').add(detail);
+      await db.collection("Cakes").add(detail);
       setDone(100);
-      if (detail.Category === 'Designer cake') {
+      if (detail.Category === "Designer cake") {
         setDesignerCake([detail, ...DesignerCake]);
       }
-      if (detail.Category === 'Festival cake') {
+      if (detail.Category === "Festival cake") {
         setFestivalCake([detail, ...festivalCake]);
       }
-      if (detail.Category === 'Birthday Cake') {
+      if (detail.Category === "Birthday Cake") {
         setBirthdayCake([detail, ...birthdayCake]);
       }
       setSuccess(true);
@@ -86,70 +86,70 @@ const CakeForm = ({
   };
 
   return (
-    <div className="container contact-form shadow p-3 mb-5 bg-white rounded">
+    <div className='container contact-form shadow p-3 mb-5 bg-white rounded'>
       {showProgress && (
-        <div className="d-flex">
+        <div className='d-flex'>
           <Line
             percent={done}
-            strokeWidth="1"
-            strokeColor="#50DBB4"
-            trailColor="white"
+            strokeWidth='1'
+            strokeColor='#50DBB4'
+            trailColor='white'
           />
           <span>{done}%</span>
         </div>
       )}
-      <form method="post" onSubmit={HandleSubmit}>
+      <form method='post' onSubmit={HandleSubmit}>
         {success && (
-          <div className="alert alert-success" role="alert">
+          <div className='alert alert-success' role='alert'>
             success!
           </div>
         )}
         {error && (
-          <div className="alert alert-danger" role="alert">
+          <div className='alert alert-danger' role='alert'>
             something went wrong!
           </div>
         )}
         <h3>Add You Cakes Here</h3>
 
-        <div className="row">
-          <div className="col-md-6">
-            <div className="form-group">
+        <div className='row'>
+          <div className='col-md-6'>
+            <div className='form-group'>
               <input
-                type="file"
-                className="form-control"
-                placeholder="Select Image From here"
+                type='file'
+                className='form-control'
+                placeholder='Select Image From here'
                 onChange={(e) => preview(e.target.files[0])}
-                value=""
+                value=''
               />
               {cakePreview && (
                 <img
-                  style={{ height: '120px' }}
-                  alt="enter img"
+                  style={{ height: "120px" }}
+                  alt='enter img'
                   src={cakePreview}
                 />
               )}
             </div>
 
-            <div className="form-group mt-2">
+            <div className='form-group mt-2'>
               <input
-                type="text"
-                className="form-control"
-                placeholder="Enter Product Name"
+                type='text'
+                className='form-control'
+                placeholder='Enter Product Name'
                 ref={name}
               />
             </div>
-            <div className="form-group mt-2">
+            <div className='form-group mt-2'>
               <input
-                type="text"
-                className="form-control"
-                placeholder="Enter Price"
+                type='text'
+                className='form-control'
+                placeholder='Enter Price'
                 ref={price}
               />
             </div>
-            <div className="form-group mt-2">
+            <div className='form-group mt-2'>
               <select
-                className="form-control"
-                placeholder="Select a Category"
+                className='form-control'
+                placeholder='Select a Category'
                 ref={Category}
               >
                 {Add.map((address, key) => (
@@ -158,23 +158,23 @@ const CakeForm = ({
               </select>
             </div>
           </div>
-          <div className="col-md-6 text-area ">
-            <div className="form-group ">
+          <div className='col-md-6 text-area '>
+            <div className='form-group '>
               <textarea
-                name="txtMsg"
-                className="form-control"
-                placeholder="Your Message *"
-                style={{ width: '100%', height: '180px' }}
+                name='txtMsg'
+                className='form-control'
+                placeholder='Your Message *'
+                style={{ width: "100%", height: "180px" }}
                 ref={description}
               ></textarea>
             </div>
           </div>
-          <div className="form-group mt-2">
+          <div className='form-group mt-2'>
             <input
-              type="submit"
-              name="btnSubmit"
-              className="btnContact"
-              value="Submit"
+              type='submit'
+              name='btnSubmit'
+              className='btnContact'
+              value='Submit'
             />
           </div>
         </div>
