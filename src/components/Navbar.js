@@ -10,7 +10,7 @@ const Navbar = () => {
       >
         <div class="container-fluid" >
           <a className="navbar-brand ms-4" href="#">
-            VIRSHMANI &nbsp; CAKES 
+            Virashmani The Baker 
           </a>
           <button
             class="navbar-toggler"
