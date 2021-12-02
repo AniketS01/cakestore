@@ -12,13 +12,13 @@ const Cakecards = ({
   price,
   removeData,
 }) => {
-  const deleteCake = () => {
+  const deleteCake = async () => {
     try {
       console.log(img_id);
+      await db.collection("Cakes").doc(id).delete();
       axios.post(`http://localhost:5000/api/delete`, {
         clid: img_id,
       });
-      db.collection("Cakes").doc(id).delete();
       console.log("success");
       removeData(id);
     } catch (error) {
