@@ -38,7 +38,7 @@ const CakeForm = ({
 
     try {
       if (!cakePreview) return;
-      const { data } = await axios.post("http://localhost:5000/api/upload", {
+      const { data } = await axios.post("https://virashmani.herokuapp.com/api/upload", {
         data: cakePreview,
       });
       const detail = {

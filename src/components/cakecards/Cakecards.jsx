@@ -16,7 +16,7 @@ const Cakecards = ({
     try {
       console.log(img_id);
       await db.collection("Cakes").doc(id).delete();
-      axios.post(`http://localhost:5000/api/delete`, {
+      axios.post(`https://virashmani.heroku.com/api/delete`, {
         clid: img_id,
       });
       console.log("success");
@@ -28,7 +28,7 @@ const Cakecards = ({
 
   return (
     <>
-      <div className='col-md-3'>
+      <div className='col-md-3 mt-4'>
         <div className='card-sl'>
           <div className='card-image'>
             <img className='img-fluid cardsize' src={img} />
